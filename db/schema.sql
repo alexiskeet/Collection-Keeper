@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS crowdfund_db;
-CREATE DATABASE crowdfund_db;
--- TODO: change names
+DROP DATABASE IF EXISTS collection_db;
+CREATE DATABASE collection_db;
+-- this is the same name that go in your .env file
