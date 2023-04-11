@@ -11,7 +11,7 @@ Product.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        product_name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -19,13 +19,20 @@ Product.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        product_date: {
+        date: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        product_location: {
+        location: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        collection_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: "collection",
+                key: "id",
+            }
         },
     },
     {
