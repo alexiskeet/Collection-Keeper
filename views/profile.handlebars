@@ -1,29 +1,15 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{user.name}}!</h2>
-  </div>
-</div>
-
 <div class="row mt-4">
   <div class="col-md-6">
-    <h3>Create a New Product:</h3>
+    <h3>Create a New Collection:</h3>
 
-    <form class="form new-project-form">
+    <form class="form new-collection-form">
       <div class="form-group">
-        <label for="product-name">Product name:</label>
-        <input class="form-input" type="text" id="product-name" name="product-name" />
+        <label for="collection-name">Collection name:</label>
+        <input class="form-input" type="text" id="collection-name" name="collection-name" />
       </div>
       <div class="form-group">
-        <label for="product-date">Date Purchased:</label>
-        <textarea class="form-input" id="product-date" name="product-date"></textarea>
-      </div>
-    <div class="form-group">
-        <label for="product-location">Purchase Location:</label>
-        <textarea class="form-input" id="product-location" name="product-location"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="product-desc">Description:</label>
-        <textarea class="form-input" id="product-desc" name="product-desc"></textarea>
+        <label for="collection-desc">Description:</label>
+        <textarea class="form-input" id="collection-desc" name="collection-desc"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -31,17 +17,17 @@
     </form>
   </div>
 
-  {{#if products.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Product:</h3>
+  {{#if collections.length}}
+  <div class="col-md-6 collection-list">
+    <h3>Current Collection:</h3>
 
-    {{#each products as |product|}}
+    {{#each collections as |collection|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/product/{{product.id}}">{{product.name}}</a></h4>
+        <h4><a href="/collection/{{collection.id}}">{{collection.name}}</a></h4>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger" data-id="{{collection.id}}">DELETE</button>
       </div>
     </div>
     {{/each}}
@@ -49,4 +35,4 @@
   {{/if}}
 </div>
 
-<script src="/public/js/profile.js"></script>
+<script src="./js/profile.js"></script>
