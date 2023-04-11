@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/style.css">
+  <title>Collection Keeper</title>
+</head>
+
+<body>
+  <div class="flex-column justify-space-around">
+    <header class="display-flex justify-space-between align-center p-2">
+      <h1>
+        <a href="/">Collection Keeper!</a>
+      </h1>
+      <nav>
+        <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <a href="/profile">Profile</a> |
+        <button class="no-button" id="logout">Logout</button>
+        {{else}}
+        <a href="/login">Login</a>
+        {{/if}}
+      </nav>
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the sub layout -->
+      <div class="row">
+        <div class="col-auto">
+          <h2>Welcome, {{user.name}}!</h2>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h3>Create a New Product:</h3>
+      
+          <form class="form new-project-form">
+            <div class="form-group">
+              <label for="product-name">Product name:</label>
+              <input class="form-input" type="text" id="product-name" name="product-name" />
+            </div>
+            <div class="form-group">
+              <label for="product-date">Date Purchased:</label>
+              <textarea class="form-input" id="product-date" name="product-date"></textarea>
+            </div>
+          <div class="form-group">
+              <label for="product-location">Purchase Location:</label>
+              <textarea class="form-input" id="product-location" name="product-location"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="product-desc">Description:</label>
+              <textarea class="form-input" id="product-desc" name="product-desc"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      
+        {{#if products.length}}
+        <div class="col-md-6 project-list">
+          <h3>Current Product:</h3>
+      
+          {{#each products as |product|}}
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <h4><a href="/product/{{product.id}}">{{product.name}}</a></h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      
+      <script src="./js/profile.js"></script>
+    </main>
+    <footer>
+      
+    </footer>
+  </div>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="./js/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>
