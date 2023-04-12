@@ -1,10 +1,96 @@
-! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css
 /* Document
    ========================================================================== */
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+ .tooltip {
+  position: relative;
+  height: 20px;
+  width: 250px;
+  text-align: center;
+  line-height: 20px;
+  margin: 0 auto; 
+ }
+ .tooltip:before {
+   position: absolute;
+   z-index: 2;
+   display: none;
+   width: 200px;
+   max-width: 200px;
+   padding: 10px;
+   font-size: 0.8em;
+   line-height: 1.4;
+   border-radius: 5px;
+   background-color: rgba(0, 0, 0, 0.8);
+   color: white;
+   content: attr(title);
+ }
+ .tooltip:after {
+   position: absolute;
+   z-index: 1;
+   display: none;
+   width: 0;
+   height: 0;
+   border: 5px solid transparent;
+   content: "";
+ }
+ .tooltip:hover:before,
+ .tooltip:hover:after {
+   display: inline-block;
+ }
+ .tooltip.top:before {
+   bottom: calc(100% + 5px);
+   left: 50%;
+
+   /* Why use transform vs. position? There's a great article on that here: https://medium.com/@ArthurFinkler/css-animations-translate-vs-absolute-positioning-and-background-position-dd39fbdeade5 */
+   transform: translateX(-50%);
+ }
+ .tooltip.top:after {
+   bottom: 100%;
+   left: 50%;
+   transform: translateX(-50%);
+   border-bottom-width: 0;
+   border-top-color: rgba(0, 0, 0, 0.8);
+ }
+.tooltip.bottom:before {
+   top: calc(100% + 5px);
+   left: 50%;
+   transform: translateX(-50%);
+ }
+ .tooltip.bottom:after {
+   top: 100%;
+   left: 50%;
+   transform: translateX(-50%);
+   border-top-width: 0;
+   border-bottom-color: rgba(0, 0, 0, 0.8);
+ }
+ .tooltip.left:before {
+   top: 50%;
+   right: calc(100% + 5px);
+   transform: translateY(-50%);
+ }
+ .tooltip.left:after {
+   top: 50%;
+   right: 100%;
+   transform: translateY(-50%);
+   border-right-width: 0;
+   border-left-color: rgba(0, 0, 0, 0.8);
+ }
+ .tooltip.right:before {
+   top: 50%;
+   left: calc(100% + 5px);
+   transform: translateY(-50%);
+ }
+ .tooltip.right:after {
+   top: 50%;
+   left: 100%;
+   transform: translateY(-50%);
+   border-left-width: 0;
+   border-right-color: rgba(0, 0, 0, 0.8);
+ }
+
 html {
   line-height: 1.15;
   /* 1 */
@@ -372,7 +458,24 @@ h6 {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+  -webkit-transform: skew(-10deg, -10deg) rotate(5deg);
+  transform: skew(-10deg, -10deg) rotate(5deg);
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+  text-shadow: 1px 1px #044d6f,
+  2px 2px #044d6f,
+  3px 3px #044d6f,
+  4px 4px #044d6f,
+  5px 5px #044d6f,
+  6px 6px #044d6f,
+  7px 7px #044d6f,
+  8px 8px #033e5a,
+  9px 9px #033e5a,
+  10px 10px #033e5a,
+  11px 11px 15px rgba(0,0,0,0.5);
+              
 }
 
 h2 {
@@ -419,15 +522,34 @@ button {
   margin: 0;
 }
 
+h1 a{
+  color: #065b83;
+}
 a {
-  color: #1b89bc;
+  color: #2d3e50;
   text-decoration: none;
 }
 
-a:hover {
-  color: #065b83;
-  text-decoration: underline;
+nav a:hover {
+  text-align: center;
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  margin: 0;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: 1px solid transparent;
+  outline: none;
+  color: #d9e9e8;
+  background-color: #57779a;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  box-shadow: 5px 5px 6px -3px gray;
 }
+
+h1 a:hover {
+  color: #57779a;
+  text-decoration: none;
+ } 
 
 /* HEIGHT / WIDTH UTILS */
 .w-100 {
@@ -966,7 +1088,14 @@ a:hover {
 }
 
 .display-flex {
-  display: flex !important;
+  display: flex !important; 
+  position: fixed;
+  top: 0;
+  height: 130px;
+  width: 100%;
+  z-index: 99;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 .btn {
@@ -988,26 +1117,6 @@ a:hover {
   background-color: #cecece;
 }
 
-.btn.btn-squared {
-  border-radius: 0;
-}
-
-.btn.btn-sm {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.9rem;
-}
-
-.btn.btn-lg {
-  font-size: 1.25rem;
-  padding: 0.8rem 1.4rem;
-}
-
-.btn.btn-block {
-  width: 100%;
-  display: block;
-  text-align: center;
-}
-
 .btn.btn-primary {
   background-color: #2d3e50;
   color: #d9e9e8;
@@ -1017,67 +1126,14 @@ a:hover {
   background-color: #57779a;
 }
 
+/* delete buttons in profile.handlebars and collection.handlebars */
 .btn.btn-danger {
   background-color: #e64c66;
   color: #ffffff;
 }
-
+/* delete buttons in profile.handlebars and collection.handlebars */
 .btn.btn-danger:hover {
   background-color: #ee8294;
-}
-
-.btn.btn-info {
-  background-color: #1bbc9b;
-  color: #ffffff;
-}
-
-.btn.btn-info:hover {
-  background-color: #31e1bd;
-}
-
-.btn.btn-light {
-  background-color: #d9e9e8;
-  color: #1a1a1a;
-}
-
-.btn.btn-light:hover {
-  background-color: #84b8b4;
-}
-
-.btn.btn-dark {
-  background-color: #1a1a1a;
-  color: #d9e9e8;
-}
-
-.btn.btn-dark:hover {
-  background-color: #5f5f5f;
-}
-
-.btn.btn-white {
-  background-color: #ffffff;
-  color: #1a1a1a;
-}
-
-.btn.btn-white:hover {
-  background-color: #cccccc;
-}
-
-.btn.btn-black {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.btn.btn-black:hover {
-  background-color: #666666;
-}
-
-.btn.btn-link {
-  background-color: #1b89bc;
-  color: #ffffff;
-}
-
-.btn.btn-link:hover {
-  background-color: #31a9e1;
 }
 
 .card {
@@ -1087,7 +1143,7 @@ a:hover {
 
 .card .card-header {
   padding: 0.375rem;
-  background-color: #2d3e50;
+  background-color: #435c5f;
   color: #d9e9e8;
 }
 
@@ -1186,6 +1242,7 @@ form [type='radio'] {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  margin-top: 150px;
 }
 
 .flex-wrap {
@@ -1264,6 +1321,7 @@ form [type='radio'] {
 }
 
 .col-auto {
+  justify-content: center;
   flex-grow: 1;
   flex-basis: 0;
 }
@@ -1441,6 +1499,7 @@ form [type='radio'] {
     flex: 0 0 25%;
     max-width: 25%;
   }
+  /* delete button */
   .col-md-4 {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
@@ -1449,6 +1508,7 @@ form [type='radio'] {
     flex: 0 0 41.66667%;
     max-width: 41.66667%;
   }
+  /* div containing the form that creates a collection or product AND the div containing the list of created collections and products*/
   .col-md-6 {
     flex: 0 0 50%;
     max-width: 50%;
@@ -1456,7 +1516,9 @@ form [type='radio'] {
   .col-md-7 {
     flex: 0 0 58.33333%;
     max-width: 58.33333%;
+    border-left: 4px double #2d3e50;
   }
+  /* list of collections and products after they are created next to the delete buttons*/
   .col-md-8 {
     flex: 0 0 66.66667%;
     max-width: 66.66667%;
