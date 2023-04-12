@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="cooltipz.min.css" rel="stylesheet" /> -->
   <link rel="stylesheet" href="../public/css/style.css">
   <title>Collection Keeper</title>
 </head>
@@ -12,31 +13,137 @@
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
       <h1>
-        <a href="/">Collection Keeper!</a>
+        <a href="/">Collection Keeper</a>
       </h1>
       <nav>
         <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
+
         <a href="/profile">Profile</a> |
-        <button class="no-button" id="logout">Logout</button>
-        {{else}}
-        <a href="/login">Login</a>
-        {{/if}}
+        <a href="/login">Login</a> |
+
+        <a href="/logout">Logout</a>
+
       </nav>
     </header>
     <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      <div class="row">
+
+
+
+      <!-- start of login.handlebars -->
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <h2>Login</h2>
+
+          <form class="form login-form">
+            <div class="form-group">
+              <label for="email-login">Email:</label>
+              <input class="form-input" type="text" id="email-login" />
+            </div>
+            <div class="form-group">
+              <label for="password-login">Password:</label>
+              <input class="form-input" type="password" id="password-login" />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h2>Register</h2>
+
+          <form class="form signup-form">
+            <div class="form-group">
+              <label for="name-signup">Name:</label>
+              <input class="form-input" type="text" id="name-signup" />
+            </div>
+            <div class="form-group">
+              <label for="email-signup">Email:</label>
+              <input class="form-input" type="text" id="email-signup" />
+            </div>
+            <div class="form-group">
+              <label for="password-signup">Password:</label>
+              <input class="form-input" type="password" id="password-signup" />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+      </div> -->
+
+      <!-- end of login.handlebars -->
+
+
+      <!-- start of profile.handlebars code -->
+<!-- 
+    <div class="row">
         <div class="col-auto">
-          <h2>Welcome, {{user.name}}!</h2>
+          <h2>Welcome, JEANNA!</h2>
         </div>
       </div>
-      
+      <br>
       <div class="row mt-4">
         <div class="col-md-6">
+          <h3>Create a New Collection:</h3>
+
+          <form class="form new-collection-form">
+            <div class="form-group">
+              <label for="collection-name">Collection name:</label>
+              <input class="form-input" type="text" id="collection-name" name="collection-name" />
+            </div>
+            <div class="form-group">
+              <label for="collection-desc">Description:</label>
+              <textarea class="form-input" id="collection-desc" name="collection-desc"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-6 collection-list">
+          <h3>Saved Collections:</h3>
+
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <h4><a class="tooltip top" title="Click me" href="/collection/{{collection.id}}"> Movie Collection</a>
+              </h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{collection.id}}">DELETE</button>
+            </div>
+            <div class="col-md-8">
+              <h4><a class="tooltip top" title="Click me" href="/collection/{{collection.id}}">Sports Cards
+                  Collection</a></h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{collection.id}}">DELETE</button>
+            </div>
+            <div class="col-md-8">
+              <h4><a class="tooltip top" title="Click me" href="/collection/{{collection.id}}">Pokemon Card
+                  Collection</a></h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{collection.id}}">DELETE</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- end of profile.handlebars code -->
+
+      <!-- start of collection.handlebars code -->
+
+      <div class="row">
+        <div class="col-auto">
+          <h2 data-collection-id={{collection.id}} id="collectionName">MOVIES Collection</h2>
+        </div>
+      </div> 
+       <div class="row mt-4">
+        <div class="col-md-6">
           <h3>Create a New Product:</h3>
-      
-          <form class="form new-project-form">
+
+          <form class="form new-product-form">
             <div class="form-group">
               <label for="product-name">Product name:</label>
               <input class="form-input" type="text" id="product-name" name="product-name" />
@@ -45,7 +152,7 @@
               <label for="product-date">Date Purchased:</label>
               <textarea class="form-input" id="product-date" name="product-date"></textarea>
             </div>
-          <div class="form-group">
+            <div class="form-group">
               <label for="product-location">Purchase Location:</label>
               <textarea class="form-input" id="product-location" name="product-location"></textarea>
             </div>
@@ -57,37 +164,69 @@
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
-        </div>
-      
-        {{#if products.length}}
-        <div class="col-md-6 project-list">
-          <h3>Current Product:</h3>
-      
-          {{#each products as |product|}}
-          <div class="row mb-2">
+        </div> 
+
+    <div class="col-md-6 product-list">
+          <h3>Products in your Collection:</h3> 
+
+
+      <div class="row mb-2">
             <div class="col-md-8">
-              <h4><a href="/product/{{product.id}}">{{product.name}}</a></h4>
+              <h4><a class="tooltip top" title="Click me" href="/product/{{product.id}}">HARRY POTTER SORCERS STONE</a></h4>
             </div>
             <div class="col-md-4">
               <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
             </div>
-          </div>
-          {{/each}}
-        </div>
-        {{/if}}
+            <div class="col-md-8">
+              <h4><a class="tooltip top" title="Click me" href="/product/{{product.id}}">HARRY POTTER CHAMBER OF SECRETS</a></h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
+            </div>
+            <div class="col-md-8">
+              <h4><a class="tooltip top" title="Click me" href="/product/{{product.id}}">HARRY POTTER PRISONER OF AZKABAN</a></h4>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
+            </div>
+          </div> 
       </div>
-      
-      <script src="./js/profile.js"></script>
+     </div>
+ 
+      <!-- end of collection.handlebars code -->
+
+      <!-- start of homepage.handlebars -->
+      <!-- <div class="row mb-4 product">
+  <div class="col-md-5">
+      <h2>
+          <a href="/product/{{product.id}}">HARRY POTTER SORCERS STONE</a>
+      </h2>
+      <p>
+          Location:
+          www.vudu.com
+      </p>
+      <p>Created by JEANNA on April 11, 2023</p>
+  </div>
+  <div class="col-md-7">
+      <p>
+          Product Description:
+          Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter
+      </p>
+  </div>
+</div> -->
+      <!-- end of homepage.handlebars -->
+
+
     </main>
     <footer>
-      
+      <!-- <p>adsjkfhkjl</p> -->
     </footer>
   </div>
 
   <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="./js/logout.js"></script>
-  {{/if}}
+  <!-- {{#if logged_in}} -->
+  <!-- <script src="./js/logout.js"></script>
+  {{/if}} -->
 </body>
 
 </html>
