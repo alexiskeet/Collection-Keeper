@@ -2,13 +2,13 @@
 <div class="row mb-4 product">
     <div class="col-md-5">
         <h2>
-            <a href="/product/{{product.id}}">{{product.product_name}}</a>
+            <a href="/product/{{product.id}}">{{product.name}}</a>
         </h2>
         <p>
             Location:
-            {{product.product_location}}
+            {{product.location}}
         </p>
-        <p>Created by {{product.user.name}} on {{format_date product.product_date}}</p>
+        <p>Created by {{product.name}} on {{format_date product.date}}</p>
     </div>
     <div class="col-md-7">
         <p>
