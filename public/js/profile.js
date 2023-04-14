@@ -5,7 +5,7 @@
     const description = document.querySelector('#collection-desc').value.trim();
   
     if (name && description) {
-      const response = await fetch(`/api/collections`, {
+      const response = await fetch(`/api/product`, {
         method: 'POST',
         body: JSON.stringify({ name, description }),
         headers: {

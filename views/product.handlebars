@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-auto">
+    <h2 data-collection-id={{collection.id}} id="collectionName">{{collection.name}}</h2>
+  </div>
+</div>
+<br>
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Create a New Product:</h3>
+
+    <form class="form new-product-form">
+      <div class="form-group">
+        <label for="product-name">Product name:</label>
+        <input class="form-input" type="text" id="product-name" name="product-name" />
+      </div>
+      <div class="form-group">
+        <label for="product-date">Date Purchased:</label>
+        <textarea class="form-input" id="product-date" name="product-date"></textarea>
+      </div>
+    <div class="form-group">
+        <label for="product-location">Purchase Location:</label>
+        <textarea class="form-input" id="product-location" name="product-location"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-desc">Description:</label>
+        <textarea class="form-input" id="product-desc" name="product-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if products.length}}
+  <div class="col-md-6 product-list">
+    <h3>Products You Have Listed:</h3>
+
+    {{#each products as |product|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a class="tooltip top" title="Click me" href="/product/{{product.id}}">{{product.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{product.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/product.js"></script>  
